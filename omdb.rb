@@ -42,9 +42,13 @@ get '/poster/:imdb' do |imdb_id|
   html_str = "<html><head><title>Movie Poster</title></head><body><h1>Movie Poster</h1>\n"
   response = Typhoeus.get("www.omdbapi.com/?i=#{imdb_id}")
 
+  id_hash= JSON.parse(response.body)
+  poster_link = id_hash["Poster"]
+
 
   html_str = "<html><head><title>Movie Poster</title></head><body><h1>Movie Poster</h1>\n"
-  html_str = "<h3>#{imdb_id}</h3>"
+  html_str = "<h3><a href = #{imdb_id}> </a></h3>"
+  html_str +="<img src = #{poster_link}>"
   html_str += '<br /><a href="/">New Search</a></body></html>'
 
 end
