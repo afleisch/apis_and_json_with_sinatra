@@ -25,12 +25,13 @@ post '/result' do
   raw_movie_data_arr_of_hashes = JSON.parse(response.body)["Search"]
 
 
-  
-  # puts raw_movie_data['Search'].each { |movie_hash| puts "#{movie_hash['Title']}"}
-
+  arr_of_titles = []
+  raw_movie_data_arr_of_hashes.each {|movie_hash| arr_of_titles << movie_hash['Title']}
+  final_movie_list = []
+  # arr_of_titles.each { |title| fin }
 
   html_str = "<html><head><title>Movie Search Results</title></head><body><h1>Movie Results</h1>\n<ul>"
-  html_str += "<li>#{raw_movie_data}</li></ul></body></html>"
+  html_str += "<li>#{arr_of_titles}</li></ul></body></html>"
   
 end
 
