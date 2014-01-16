@@ -26,11 +26,18 @@ post '/result' do
 
 
   arr_of_titles = []
-  raw_movie_data_arr_of_hashes.each {|movie_hash| arr_of_titles << movie_hash['Title']}
-  movie_list = " "
-  arr_of_titles.each { |title| movie_list += "#{title} " }
+  # raw_movie_data_arr_of_hashes.select { |movie_hash| movie_hash {|k, v| v != 'movie'}}
+  #raw_movie_data_arr_of_hashes.map { |movie_hash| movie_hash.delete_if {|k, v| k != 'Title' && k != 'Year'} }
+
+  #{movie_hash.select {|key, value|  = "movie"}}
+  raw_movie_data_arr_of_hashes.each {|movie_hash| 
+      if movie_hash["Type"] = "movie"
+        arr_of_titles << movie_hash['Title'] + ", " + movie_hash['Year']
+      end } 
+  # movie_list = " "
+  # arr_of_titles.each { |title| movie_list += "#{title} " }
   html_str = "<html><head><title>Movie Search Results</title></head><body><h1>Movie Results</h1>\n<ul>"
-  html_str += "<li>#{movie_list}</li></ul></body></html>"
+  html_str += "<li>#{arr_of_titles}</li></ul></body></html>"
   
 end
 
